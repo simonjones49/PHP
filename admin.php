@@ -21,7 +21,8 @@
  *
  *
  */
-$local = 1;
+include 'config.php' ;
+
  $ipaddress = 'UNKNOWN';
     if (getenv('HTTP_CLIENT_IP'))
         $ipaddress = getenv('HTTP_CLIENT_IP');
@@ -36,16 +37,14 @@ $local = 1;
     else if(getenv('REMOTE_ADDR'))
         $ipaddress = getenv('REMOTE_ADDR');
 
-if ($ipaddress == '185.217.112.208' or $local == 1){
+if ($ipaddress == '$adminip' or $local == 1){
 }
 else {
 header("Location: index.php");
 die();
 }
 
-// Set dir to use
-$filedir = './files994';
-$log = 'log.txt';
+
 
 // scan for file
 $filelist = scandir($filedir);

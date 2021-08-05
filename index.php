@@ -21,11 +21,8 @@
  *
  *
  */
+include 'config.php' ;
 
-// Set dir to use
-$filedir = './files994';
-$log = 'log.txt';
-$local = 1;
 // scan for file
 $filelist = scandir($filedir);
 
@@ -118,7 +115,7 @@ foreach($filelist as $item):
 
  }
 endforeach;
-if ($ipaddress == '185.217.112.208' or $local == 1){
+if ($ipaddress == $adminip or $local == 1){
     echo '<a href="admin.php">Admin</a>';
 }
 echo '
