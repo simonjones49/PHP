@@ -22,7 +22,7 @@ function ajax_file_upload(file_obj) {
         xhttp.onload = function(event) {
             oOutput = document.querySelector('.img-content');
             if (xhttp.status == 200) {
-  window.open('admin.php', "_top");
+            window.open('admin.php', "_top");
                                   
             } else {
                 oOutput.innerHTML = "Error " + xhttp.status + " occurred when trying to upload your file.";
