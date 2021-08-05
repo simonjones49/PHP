@@ -32,10 +32,14 @@ $filename = $_GET['file'];
 
 // Check filename is not empty but it is set
 if (isset($filename) && $filename !== ''){	
+
+// Set download type
 $dl_type="application/octet-stream";
-	
+
+// Set full path with filename
 $path = $filedir . '/' . $filename;
 
+// Proceed if file exists
 if(file_exists($path)) {
 	
 header("Pragma: public");
@@ -81,8 +85,16 @@ echo '
 foreach($filelist as $item):
 	
 	if (preg_match('#[a-z]#',$item)){
-
-		echo '<p><a href="index.php?file=' . $item . '">' . $item . '</a></p>';
+	
+	$pi = pathinfo($item);
+ 
+	$descfile = $pi['filename'] . ".txt";  // filename
+	$desc = null;
+	if(file_exists('./desc/' . $descfile)) {
+	$desc = file_get_contents('./desc/' . $descfile);
+	}
+	
+		echo '<p><a href="index.php?file=' . $item . '">' . $item . '</a><pre>' . $desc . '</pre></p>';
 		
 	}
 endforeach;
