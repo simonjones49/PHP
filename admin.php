@@ -50,26 +50,24 @@ $log = 'log.txt';
 $filelist = scandir($filedir);
 
 if ($_POST['update'] == 'update') {
- 
- 
+
 foreach($_POST as $key=>$value)
 {
-	
+
 	if ($key == '' or $key == 'update'){
 	}
 	else {
 	$pi = pathinfo($key);
-	
+
 	$descfile = $pi['filename'] ;  // filename
-	
-    
+
+
 	$fp = fopen('./desc/' . $descfile, "w");
 	fwrite($fp, $value);
 	fclose($fp);
 	}
-	
-} 
 
+}
 
 header("Location: admin.php");
 }
