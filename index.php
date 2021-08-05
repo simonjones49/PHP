@@ -21,8 +21,10 @@
  * 
  * 
  */
+ 
 // Set dir to use 
 $filedir = './files994';
+$log = 'log.txt';
 
 // scan for file
 $filelist = scandir($filedir);
@@ -53,7 +55,27 @@ header('Content-Disposition: attachment; filename="'.basename($path).'"');
 header("Content-Transfer-Encoding: binary\n");
 
 readfile($path); // outputs the content of the file
+		    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    
 
+		$newlog = $ipaddress . ":" . $path . "\n";
+		$fp = fopen($log, "a");
+		fwrite($fp, $newlog);
+		fclose($fp);
 
 //Terminate from the script
 die();
@@ -80,6 +102,7 @@ echo '
 </head>
 
 <body>
+<h1> Downloads </h1>
 ';
 
 foreach($filelist as $item):
