@@ -49,9 +49,31 @@ $log = 'log.txt';
 // scan for file
 $filelist = scandir($filedir);
 
+if ($_POST['update'] == 'update') {
+ 
+ 
+foreach($_POST as $key=>$value)
+{
+	
+	if ($key == '' or $key == 'update'){
+	}
+	else {
+	$pi = pathinfo($key);
+	
+	$descfile = $pi['filename'] ;  // filename
+	
+    
+	$fp = fopen('./desc/' . $descfile, "w");
+	fwrite($fp, $value);
+	fclose($fp);
+	}
+	
+} 
 
 
-
+header("Location: admin.php");
+}
+else {
 echo '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -64,12 +86,32 @@ echo '
 </head>
 
 <body>
+<form action="" method="post">
 ';
+foreach($filelist as $item):
 
+ if (preg_match('#[a-z]#',$item)){
+
+ $pi = pathinfo($item);
+
+ $descfile = $pi['filename'] . "_txt";  // filename
+
+ //if(file_exists($descfile)) {
+ $desc = file_get_contents('./desc/' . $descfile);
+// }
+
+  echo '<p>' . $item .
+  '<br><textarea cols="40" rows=5" name="' . $descfile . '">' . $desc . '</textarea><p/>';
+
+ }
+endforeach;
 
 echo '
+<input type="submit" value="update" name="update">
+</form>
 </body>
 
 </html>
 ';
+}
 ?>

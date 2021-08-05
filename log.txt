@@ -1,3 +1,4 @@
 
 unknown:./files994/MicroProfile_Metrics.pdf
 ::1:./files994/CheatSheet_QuarkusObservability-v2.pdf
+::1:./files994/admin.php

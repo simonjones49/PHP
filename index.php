@@ -109,8 +109,7 @@ foreach($filelist as $item):
 
  $pi = pathinfo($item);
 
- $descfile = $pi['filename'] . ".txt";  // filename
- $desc = null;
+ $descfile = $pi['filename'] . "_txt";  // filename
  if(file_exists('./desc/' . $descfile)) {
  $desc = file_get_contents('./desc/' . $descfile);
  }
