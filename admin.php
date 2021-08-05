@@ -21,6 +21,7 @@
  *
  *
  */
+$local = 1;
  $ipaddress = 'UNKNOWN';
     if (getenv('HTTP_CLIENT_IP'))
         $ipaddress = getenv('HTTP_CLIENT_IP');
@@ -35,11 +36,11 @@
     else if(getenv('REMOTE_ADDR'))
         $ipaddress = getenv('REMOTE_ADDR');
 
-if ($ipaddress == '185.217.112.208'){
+if ($ipaddress == '185.217.112.208' or $local == 1){
 }
 else {
-//header("Location: index.php");
-//die();
+header("Location: index.php");
+die();
 }
 
 // Set dir to use
