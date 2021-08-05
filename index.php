@@ -70,8 +70,6 @@ readfile($path); // outputs the content of the file
         $ipaddress = getenv('REMOTE_ADDR');
     else
         $ipaddress = 'UNKNOWN';
-    
-
 		$newlog = $ipaddress . ":" . $path . "\n";
 		$fp = fopen($log, "a");
 		fwrite($fp, $newlog);
