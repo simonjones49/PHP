@@ -49,8 +49,27 @@ $log = 'log.txt';
 
 // scan for file
 $filelist = scandir($filedir);
+if ($_GET['delete'] != '') {
+$delfile = $filedir . '/' . $_GET['delete'];
+if (file_exists($delfile)) {
+unlink ($delfile);
 
-if ($_POST['update'] == 'update') {
+ $pid = pathinfo($_GET['delete']);
+
+ $deldescfile = $pid['filename'] . "_txt";  // filename
+ 
+ $deldesc =  './desc/' . $deldescfile;
+ 
+//echo $deldesc;
+if (file_exists($deldesc)) {
+unlink ($deldesc);
+}
+}
+
+header("Location: admin.php");
+die;
+}    
+elseif ($_POST['update'] == 'update') {
 
 foreach($_POST as $key=>$value)
 {
@@ -82,6 +101,7 @@ echo '
  <title>Download Administration</title>
  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
  <meta name="generator" content="Geany 1.37.1" />
+ <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -99,7 +119,7 @@ foreach($filelist as $item):
  $desc = file_get_contents('./desc/' . $descfile);
 // }
 
-  echo '<p>' . $item .
+  echo '<p>' . $item . ' <a style="color:red;" onclick="if (!confirm(\'Are you sure?\')) return false;" href="admin.php?delete=' . $item . '">Delete</a>' .
   '<br><textarea cols="40" rows=5" name="' . $descfile . '">' . $desc . '</textarea><p/>';
 
  }
@@ -108,9 +128,21 @@ endforeach;
 echo '
 <input type="submit" value="update" name="update">
 </form>
+
+<div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
+    <div id="drag_upload_file">
+        <p>Drop file here</p>
+        <p>or</p>
+        <p><input type="button" value="Select File" onclick="file_explorer();" /></p>
+        <input type="file" id="selectfile" />
+    </div>
+</div>
+<div class="img-content"></div>
+<script src="custom.js"></script>
 </body>
 
 </html>
 ';
 }
 ?>
+
