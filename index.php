@@ -27,8 +27,9 @@ include 'config.php' ;
 $filelist = scandir($filedir);
 
 // Check if we have input for a file
+if(isset($_GET['file'])) {
 $filename = $_GET['file'];
-
+}
 // Check filename is not empty but it is set
 if (isset($filename) && $filename !== ''){
 
@@ -86,8 +87,9 @@ echo '
 </head>
 
 <body>
-<div id="dlcontainer">
 <h1> Downloads </h1>
+<div class="dlcontainer">
+
 ';
 $link = 1;
 foreach($filelist as $item):
@@ -99,22 +101,30 @@ foreach($filelist as $item):
  $descfile = $pi['filename'] . "_txt";  // filename
  if(file_exists($descdir . $descfile)) {
  $desc = file_get_contents($descdir . $descfile);
+ if (preg_match('#[a-z]|[0-9]#',$desc)){
+     $desc = '<hr class="descline">' . $desc;
  }
+ }
+    echo '<div class="dlbox">';
     if ($link > 2) { $link = 1; }
     if (preg_match('#jpg|png#',$item)) {
-        echo '<div id="link' . $link . '"><img class="thumb" src="' . $thumbdir . '/' . $item . '"><a href="index.php?file=' . $item . '">' . $item . '</a><pre>' . $desc . '</pre></div>';
+        echo '<div class="link link' . $link . '"><img class="thumb" src="' . $thumbdir . '/' . $item . '"><a href="index.php?file=' . $item . '">Download</a><br>' . $item . $desc . '</div>';
     }
     else {
-        echo '<div id="link' . $link . '"><a href="index.php?file=' . $item . '">' . $item . '</a><pre>' . $desc . '</pre></div>';
+        echo '<div class="link link' . $link . '"><a href="index.php?file=' . $item . '">Download </a><br>' . $item . '<br>' . $desc . '</div>';
     }
     $link += 1;
+    echo '</div>';
  }
 endforeach;
+
+echo '
+</div>
+';
 if ($ipaddress == $adminip or $local == 1){
     echo '<a href="admin.php">Admin</a>';
 }
 echo '
-</div>
 </body>
 
 </html>

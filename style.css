@@ -16,31 +16,40 @@
 #drag_upload_file #selectfile {
   display: none;
 }
-#dlcontainer {
+.dlcontainer {
 width: 100%;
+  display: flex;
+        flex-wrap: wrap;
 }
 
-#link1 {
+.dlbox {
+
+padding: 10px;
+margin: 10px;
+     flex: 0 0 30%;
+}
+.link {
 width: 97%;
-background: #79DCAD;
 padding: 10px;
 margin: 10px;
 color: #000;
 }
-#link1 a, #link2 a {
+.link1 {
+background: #79DCAD;
+}
+.link1 a, .link2 a {
 width: 100%;
-padding: 10px;
+
 color: #123A60;
 }
-#link2 {
-width: 97%;
+.link2 {
 background: #D2B5CF;
-padding: 10px;
-margin: 10px;
-color: #000;
 }
 
 .thumb {
-width: 100px;
-height: 100px;
+display:block;
+}
+.descline {
+width: 100%;
+
 }

@@ -36,7 +36,7 @@ die();
 // scan for file
 $filelist = scandir($filedir);
 
-if ($_GET['delete'] != '') {
+if(isset($_GET['delete'])) {
 $delfile = $filedir . $_GET['delete'];
 $delthumb = $thumbdir .  $_GET['delete'];
 if (file_exists($delfile)) {
@@ -61,8 +61,9 @@ unlink ($delthumb);
 header("Location: admin.php");
 die;
 }    
-elseif ($_POST['update'] == 'update') {
-
+if (isset($_POST['update'])) {
+    
+if ($_POST['update'] == 'update') {
 foreach($_POST as $key=>$value)
 {
 
@@ -82,6 +83,7 @@ foreach($_POST as $key=>$value)
 }
 
 header("Location: admin.php");
+}
 }
 else {
 echo '
