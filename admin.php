@@ -37,7 +37,8 @@ die();
 $filelist = scandir($filedir);
 
 if ($_GET['delete'] != '') {
-$delfile = $filedir . '/' . $_GET['delete'];
+$delfile = $filedir . $_GET['delete'];
+$delthumb = $thumbdir .  $_GET['delete'];
 if (file_exists($delfile)) {
 unlink ($delfile);
 
@@ -46,10 +47,14 @@ unlink ($delfile);
  $deldescfile = $pid['filename'] . "_txt";  // filename
  
  $deldesc =  $descdir . $deldescfile;
+
  
 //echo $deldesc;
 if (file_exists($deldesc)) {
 unlink ($deldesc);
+}
+if (file_exists($delthumb)) {
+unlink ($delthumb);
 }
 }
 
@@ -97,7 +102,7 @@ echo '
 foreach($filelist as $item):
 
  if (preg_match('#[a-z]#',$item)){
-
+ $desc = '';   
  $pi = pathinfo($item);
 
  $descfile = $pi['filename'] . "_txt";  // filename
