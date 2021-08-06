@@ -104,6 +104,7 @@ foreach($filelist as $item):
  if (preg_match('#[a-z]|[0-9]#',$desc)){
      $desc = '<hr class="descline">' . $desc;
  }
+ else { $desc = ''; }
  }
     echo '<div class="dlbox">';
     if ($link > 2) { $link = 1; }

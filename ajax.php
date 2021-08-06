@@ -1,6 +1,6 @@
 <?php
 /*
- * admin.php
+ * ajax.php
  *
  * Copyright 2021 Simon Jones <simon_jones49@yahoo.es>
  *
