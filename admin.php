@@ -144,6 +144,7 @@ echo '
 </div>
 <div class="img-content"></div>
 <script src="custom.js"></script>
+ <a href="index.php">Front Page</a>
 </body>
 
 </html>
