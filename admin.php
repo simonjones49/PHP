@@ -45,7 +45,7 @@ unlink ($delfile);
  $pid = pathinfo($_GET['delete']);
 
  $deldescfile = $pid['filename'] . "_txt";  // filename
- 
+ $deldescfile = str_replace(" ","_",$deldescfile);
  $deldesc =  $descdir . $deldescfile;
 
 
@@ -71,7 +71,7 @@ foreach($_POST as $key=>$value)
 	}
 	else {
 	$pi = pathinfo($key);
-
+    
 	$descfile = $pi['filename'] ;  // filename
 
 
@@ -108,7 +108,7 @@ foreach($filelist as $item):
  $pi = pathinfo($item);
 
  $descfile = $pi['filename'] . "_txt";  // filename
-
+    $descfile = str_replace(" ","_",$descfile);
  if(file_exists($descdir . $descfile)) {
  $desc = file_get_contents($descdir . $descfile);
  }
