@@ -23,12 +23,23 @@
  */
 include 'config.php' ;
 
-
 if ($ipaddress == '$adminip' or $local == 1){
 }
 else {
 header("Location: index.php");
 die();
+}
+function makeDirPath($path) {
+    return file_exists($path) || mkdir($path, 0777, true);
+}
+if (!file_exists($filedir)) {
+     makeDirPath($filedir, 0777);
+}
+if (!file_exists($thumbdir)) {
+     makeDirPath($thumbdir, 0777);
+}
+if (!file_exists($descdir)) {
+     makeDirPath($descdir, 0777);
 }
 
 

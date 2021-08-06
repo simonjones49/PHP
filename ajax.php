@@ -46,7 +46,7 @@ move_uploaded_file($_FILES['file']['tmp_name'], $filedir . $filename);
     }
 function createThumbnail($filename) {
           include 'config.php' ;
-    if(preg_match('/[.](jpg)$/', $filename)) {
+    if(preg_match('/[.](jpg|jpeg)$/', $filename)) {
         $im = imagecreatefromjpeg($filedir . $filename);
     } else if (preg_match('/[.](gif)$/', $filename)) {
         $im = imagecreatefromgif($filedir . $filename);

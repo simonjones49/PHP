@@ -109,7 +109,7 @@ foreach($filelist as $item):
  }
     echo '<div class="dlbox">';
     if ($link > 2) { $link = 1; }
-    if (preg_match('#jpg|png#',$item)) {
+    if (preg_match('#jpg|jpeg|png#',$item)) {
         echo '<div class="link link' . $link . '"><img class="thumb" src="' . $thumbdir . $item . '"><a href="index.php?file=' . $item . '">Download</a><br>' . $item . $desc . '</div>';
     }
     else {
