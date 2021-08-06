@@ -16,3 +16,31 @@
 #drag_upload_file #selectfile {
   display: none;
 }
+#dlcontainer {
+width: 100%;
+}
+
+#link1 {
+width: 97%;
+background: #79DCAD;
+padding: 10px;
+margin: 10px;
+color: #000;
+}
+#link1 a, #link2 a {
+width: 100%;
+padding: 10px;
+color: #123A60;
+}
+#link2 {
+width: 97%;
+background: #D2B5CF;
+padding: 10px;
+margin: 10px;
+color: #000;
+}
+
+.thumb {
+width: 100px;
+height: 100px;
+}

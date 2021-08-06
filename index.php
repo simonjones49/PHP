@@ -36,7 +36,7 @@ if (isset($filename) && $filename !== ''){
 $dl_type="application/octet-stream";
 
 // Set full path with filename
-$path = $filedir . '/' . $filename;
+$path = $filedir . $filename;
 
 // Proceed if file exists
 if(file_exists($path)) {
@@ -52,19 +52,6 @@ header('Content-Disposition: attachment; filename="'.basename($path).'"');
 header("Content-Transfer-Encoding: binary\n");
 
 readfile($path); // outputs the content of the file
- $ipaddress = 'UNKNOWN';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if(getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if(getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if(getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if(getenv('HTTP_FORWARDED'))
-       $ipaddress = getenv('HTTP_FORWARDED');
-    else if(getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
 
 
   $newlog = $ipaddress . ":" . $path . "\n";
@@ -94,12 +81,15 @@ echo '
  <title>Downloads</title>
  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
  <meta name="generator" content="Geany 1.37.1" />
+  <link rel="stylesheet" href="style.css" />
+
 </head>
 
 <body>
+<div id="dlcontainer">
 <h1> Downloads </h1>
 ';
-
+$link = 1;
 foreach($filelist as $item):
 
  if (preg_match('#[a-z]#',$item)){
@@ -107,19 +97,24 @@ foreach($filelist as $item):
  $pi = pathinfo($item);
 
  $descfile = $pi['filename'] . "_txt";  // filename
- if(file_exists('./desc/' . $descfile)) {
- $desc = file_get_contents('./desc/' . $descfile);
+ if(file_exists($descdir . $descfile)) {
+ $desc = file_get_contents($descdir . $descfile);
  }
-
-  echo '<p><a href="index.php?file=' . $item . '">' . $item . '</a><pre>' . $desc . '</pre></p>';
-
+    if ($link > 2) { $link = 1; }
+    if (preg_match('#jpg|png#',$item)) {
+        echo '<div id="link' . $link . '"><img class="thumb" src="' . $thumbdir . '/' . $item . '"><a href="index.php?file=' . $item . '">' . $item . '</a><pre>' . $desc . '</pre></div>';
+    }
+    else {
+        echo '<div id="link' . $link . '"><a href="index.php?file=' . $item . '">' . $item . '</a><pre>' . $desc . '</pre></div>';
+    }
+    $link += 1;
  }
 endforeach;
 if ($ipaddress == $adminip or $local == 1){
     echo '<a href="admin.php">Admin</a>';
 }
 echo '
-
+</div>
 </body>
 
 </html>

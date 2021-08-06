@@ -24,20 +24,7 @@
 
 include 'config.php' ;
 
- 
- $ipaddress = 'UNKNOWN';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if(getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if(getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if(getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if(getenv('HTTP_FORWARDED'))
-       $ipaddress = getenv('HTTP_FORWARDED');
-    else if(getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
+
 
 if ($ipaddress == $adminip or $local == 1){
 }
@@ -52,5 +39,37 @@ if (!file_exists($filedir)) {
   
 $filename = $_FILES['file']['name'];
   
-move_uploaded_file($_FILES['file']['tmp_name'], $filedir . '/'.$filename);
+move_uploaded_file($_FILES['file']['tmp_name'], $filedir . $filename);
 
+    if(preg_match('/[.](jpg|png|jpeg)$/', $filename)) {
+    createThumbnail($filename);    
+    }
+function createThumbnail($filename) {
+          include 'config.php' ;
+    if(preg_match('/[.](jpg)$/', $filename)) {
+        $im = imagecreatefromjpeg($filedir . $filename);
+    } else if (preg_match('/[.](gif)$/', $filename)) {
+        $im = imagecreatefromgif($filedir . $filename);
+    } else if (preg_match('/[.](png)$/', $filename)) {
+        $im = imagecreatefrompng($filedir . $filename);
+    }
+     
+    $ox = imagesx($im);
+    $oy = imagesy($im);
+     
+    $nx = $final_width_of_image;
+    $ny = floor($oy * ($final_width_of_image / $ox));
+     
+    $nm = imagecreatetruecolor($nx, $ny);
+     
+    imagecopyresized($nm, $im, 0,0,0,0,$nx,$ny,$ox,$oy);
+     
+    if(!file_exists($thumbdir)) {
+      if(!mkdir($thumbdir)) {
+           die("There was a problem. Please try again!");
+      } 
+       }
+ 
+    imagejpeg($nm, $thumbdir . $filename);
+
+}

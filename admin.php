@@ -23,19 +23,6 @@
  */
 include 'config.php' ;
 
- $ipaddress = 'UNKNOWN';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if(getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if(getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if(getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if(getenv('HTTP_FORWARDED'))
-       $ipaddress = getenv('HTTP_FORWARDED');
-    else if(getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
 
 if ($ipaddress == '$adminip' or $local == 1){
 }
@@ -48,6 +35,7 @@ die();
 
 // scan for file
 $filelist = scandir($filedir);
+
 if ($_GET['delete'] != '') {
 $delfile = $filedir . '/' . $_GET['delete'];
 if (file_exists($delfile)) {
@@ -57,7 +45,7 @@ unlink ($delfile);
 
  $deldescfile = $pid['filename'] . "_txt";  // filename
  
- $deldesc =  './desc/' . $deldescfile;
+ $deldesc =  $descdir . $deldescfile;
  
 //echo $deldesc;
 if (file_exists($deldesc)) {
@@ -81,7 +69,7 @@ foreach($_POST as $key=>$value)
 	$descfile = $pi['filename'] ;  // filename
 
 
-	$fp = fopen('./desc/' . $descfile, "w");
+	$fp = fopen($descdir . $descfile, "w");
 	fwrite($fp, $value);
 	fclose($fp);
 	}
@@ -114,9 +102,9 @@ foreach($filelist as $item):
 
  $descfile = $pi['filename'] . "_txt";  // filename
 
- //if(file_exists($descfile)) {
- $desc = file_get_contents('./desc/' . $descfile);
-// }
+ if(file_exists($descdir . $descfile)) {
+ $desc = file_get_contents($descdir . $descfile);
+ }
 
   echo '<p>' . $item . ' <a style="color:red;" onclick="if (!confirm(\'Are you sure?\')) return false;" href="admin.php?delete=' . $item . '">Delete</a>' .
   '<br><textarea cols="40" rows=5" name="' . $descfile . '">' . $desc . '</textarea><p/>';
