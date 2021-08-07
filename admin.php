@@ -111,7 +111,19 @@ echo '
 </head>
 
 <body>
+<a href="index.php">Front Page</a>
+<div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
+    <div id="drag_upload_file">
+        <p>Drop file here</p>
+        <p>or</p>
+        <p><input type="button" value="Select File" onclick="file_explorer();" /></p>
+        <input type="file" id="selectfile" />
+    </div>
+</div>
+
+
 <form action="" method="post">
+<input type="submit" value="update" name="update">
 ';
 foreach($filelist as $item):
 
@@ -132,20 +144,12 @@ foreach($filelist as $item):
 endforeach;
 
 echo '
-<input type="submit" value="update" name="update">
+
 </form>
 
-<div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
-    <div id="drag_upload_file">
-        <p>Drop file here</p>
-        <p>or</p>
-        <p><input type="button" value="Select File" onclick="file_explorer();" /></p>
-        <input type="file" id="selectfile" />
-    </div>
-</div>
-<div class="img-content"></div>
+
+ 
 <script src="custom.js"></script>
- <a href="index.php">Front Page</a>
 </body>
 
 </html>
