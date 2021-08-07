@@ -57,6 +57,7 @@ unlink ($delfile);
 
  $deldescfile = $pid['filename'] . "_txt";  // filename
  $deldescfile = str_replace(" ","_",$deldescfile);
+ $deldescfile = str_replace(".","_",$deldescfile);
  $deldesc =  $descdir . $deldescfile;
 
 

@@ -83,7 +83,9 @@ echo '
  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
  <meta name="generator" content="Geany 1.37.1" />
   <link rel="stylesheet" href="style.css" />
-
+<link rel="stylesheet" href="fileicon.css" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <link rel="icon" type="image/png" href="favicon.ico" />
 </head>
 
 <body>
@@ -97,7 +99,14 @@ foreach($filelist as $item):
  if (preg_match('#[a-z]#',$item)){
 
  $pi = pathinfo($item);
+ $extension = $pi['extension'];
+ if (preg_match('#[a-z]#', $extension)) {
 
+    $file_icon = $extension;
+ }
+ else {
+     $file_icon = 'unknown';
+ }
  $descfile = $pi['filename'] . "_txt";  // filename
  $descfile = str_replace(" ","_",$descfile);
  if(file_exists($descdir . $descfile)) {
@@ -113,7 +122,7 @@ foreach($filelist as $item):
         echo '<div class="link link' . $link . '"><img class="thumb" src="' . $thumbdir . $item . '"><a href="index.php?file=' . $item . '">Download</a><br>' . $item . $desc . '</div>';
     }
     else {
-        echo '<div class="link link' . $link . '"><a href="index.php?file=' . $item . '">Download </a><br>' . $item . '<br>' . $desc . '</div>';
+        echo '<div class="link link' . $link . '"><div class="file-icon file-icon-' . $file_icon . '" data-type="' . $extension. '"></div><br><a href="index.php?file=' . $item . '">Download </a><br>' . $item . '<br>' . $desc . '</div>';
     }
     $link += 1;
     echo '</div>';
