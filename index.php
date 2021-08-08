@@ -103,6 +103,7 @@ echo '
 
 ';
 $link = 1;
+$total = 0;
 foreach($filelist as $item):
 
  if (preg_match('#[a-z]#',$item)){
@@ -135,10 +136,13 @@ foreach($filelist as $item):
         echo '<div class="link link' . $link . '"><div class="file-icon file-icon-' . $file_icon . '" data-type="' . $extension. '"></div><br><a href="index.php?file=' . $item . '">Download </a><br>' . $item . '<br>' . $desc . '</div>';
     }
     $link += 1;
+    $total +=1;
     echo '</div>';
  }
 endforeach;
-
+if ($total == 0) {
+    echo 'No Files found, check back later';
+}
 echo '
 </div>
 ';
