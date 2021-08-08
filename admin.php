@@ -114,7 +114,7 @@ echo '
 </head>
 
 <body>
-<a href="index.php" target="_self">Front Page</a>
+<a href="index.php">Front Page</a>
 <div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
     <div id="drag_upload_file">
         <p>Drop file here</p>
