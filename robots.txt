@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /desc/
+Disallow: /files/
+Allow: /thumbs/
+Allow: /
+Allow: *.css$
+Allow: *.js$
+

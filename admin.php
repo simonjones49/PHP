@@ -133,6 +133,8 @@ foreach($filelist as $item):
 
  $descfile = $pi['filename'] . "_txt";  // filename
     $descfile = str_replace(" ","_",$descfile);
+     $descfile = str_replace(".","_",$descfile);
+
  if(file_exists($descdir . $descfile)) {
  $desc = file_get_contents($descdir . $descfile);
  }

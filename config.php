@@ -23,7 +23,7 @@
  */
 
 // Set dir to use
-    $filedir = 'files/';
+    $filedir = 'files/253809svljk20895jfg/';
     $thumbdir = 'thumbs/';
     $descdir = 'desc/';
     $final_width_of_image = 100;
