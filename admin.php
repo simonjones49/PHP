@@ -108,6 +108,7 @@ echo '
  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
  <meta name="generator" content="Geany 1.37.1" />
  <link rel="stylesheet" href="style.css" />
+ <meta http-equiv="expires" content="0">
 </head>
 
 <body>
