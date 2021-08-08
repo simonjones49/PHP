@@ -141,7 +141,7 @@ foreach($filelist as $item):
  }
 endforeach;
 if ($total == 0) {
-    echo 'No Files found, check back later';
+    echo '<div class="message">No Files found, check back later</div>';
 }
 echo '
 </div>

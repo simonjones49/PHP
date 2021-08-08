@@ -75,3 +75,8 @@ display:block;
 width: 100%;
 
 }
+
+.message {
+padding : 20px;
+font-size: 30px;
+}
