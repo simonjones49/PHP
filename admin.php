@@ -109,10 +109,12 @@ echo '
  <meta name="generator" content="Geany 1.37.1" />
  <link rel="stylesheet" href="style.css" />
  <meta http-equiv="expires" content="0">
+       <script src="frame.js"></script>
+
 </head>
 
 <body>
-<a href="index.php">Front Page</a>
+<a href="index.php" target="_self">Front Page</a>
 <div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
     <div id="drag_upload_file">
         <p>Drop file here</p>

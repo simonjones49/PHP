@@ -147,7 +147,7 @@ echo '
 </div>
 ';
 if ($ipaddress == $adminip or $local == 1){
-    echo '<a href="admin.php">Admin</a>';
+    echo '<a href="admin.php" target="_self">Admin</a>';
 }
 echo '
 </body>
